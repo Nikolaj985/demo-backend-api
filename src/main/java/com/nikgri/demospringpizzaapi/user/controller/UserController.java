@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://mydemo-frontend-pizza.herokuapp.com"})
 public class UserController {
     @Autowired
     private UserService userService;
