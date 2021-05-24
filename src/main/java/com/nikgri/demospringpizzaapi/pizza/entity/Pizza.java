@@ -3,17 +3,13 @@ package com.nikgri.demospringpizzaapi.pizza.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nikgri.demospringpizzaapi.topping.entity.Topping;
-import com.nikgri.demospringpizzaapi.topping.model.ToppingDto;
-import org.graalvm.util.CollectionsUtil;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
 @Entity
-@Table(name="pizzas")
+@Table(name = "pizzas")
 public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,8 +35,8 @@ public class Pizza {
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JsonIgnore
     @JoinTable(name = "pizzas_toppings",
-    joinColumns =  @JoinColumn(name = "id_pizzas", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "id_toppings", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "id_pizzas", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_toppings", referencedColumnName = "id"))
     private Set<Topping> toppings;
 
     public Pizza() {

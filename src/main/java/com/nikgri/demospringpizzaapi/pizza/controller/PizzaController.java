@@ -1,6 +1,5 @@
 package com.nikgri.demospringpizzaapi.pizza.controller;
 
-import com.nikgri.demospringpizzaapi.pizza.entity.Pizza;
 import com.nikgri.demospringpizzaapi.pizza.model.PizzaDto;
 import com.nikgri.demospringpizzaapi.pizza.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +21,22 @@ public class PizzaController {
     }
 
     @GetMapping
-    public List<PizzaDto> getAllPizzas(){
+    public List<PizzaDto> getAllPizzas() {
         return this.pizzaService.getAllPizzas();
     }
 
     @GetMapping("/{name}")
-    public PizzaDto getPizzaByName(@PathVariable String name){
+    public PizzaDto getPizzaByName(@PathVariable String name) {
         return this.pizzaService.findByName(name);
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Object> newPizza(@RequestBody PizzaDto pizza){
+    public ResponseEntity<Object> newPizza(@RequestBody PizzaDto pizza) {
         return this.pizzaService.addNewPizza(pizza);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePizza(@PathVariable int id){
+    public void deletePizza(@PathVariable int id) {
         this.pizzaService.deletePizza(id);
     }
 

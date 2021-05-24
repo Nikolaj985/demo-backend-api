@@ -21,25 +21,25 @@ public class ToppingService {
         this.toppingRepository = toppingRepository;
     }
 
-    public List<Topping> getAlLToppings(){
+    public List<Topping> getAlLToppings() {
         return this.toppingRepository.findAll();
     }
 
-    public ResponseEntity<Object> deleteToppingById(int id){
-        if (this.toppingRepository.existsById(id)){
+    public ResponseEntity<Object> deleteToppingById(int id) {
+        if (this.toppingRepository.existsById(id)) {
             this.toppingRepository.deleteById(id);
             return new ResponseEntity<>("Deleted", HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity<>("Topping not found", HttpStatus.NOT_FOUND);
         }
     }
 
-    public ResponseEntity<Object> addNewTopping(ToppingDto toppingDto){
+    public ResponseEntity<Object> addNewTopping(ToppingDto toppingDto) {
 
-        if(!this.toppingRepository.existsByDescription(toppingDto.getDescription())){
+        if (!this.toppingRepository.existsByDescription(toppingDto.getDescription())) {
             this.toppingRepository.save(new Topping(toppingDto.getDescription()));
             return new ResponseEntity<>("Topping added!", HttpStatus.OK);
-        }else {
+        } else {
             throw new ToppingAlreadyExistException();
         }
     }

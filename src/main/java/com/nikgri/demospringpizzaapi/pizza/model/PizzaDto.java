@@ -2,9 +2,7 @@ package com.nikgri.demospringpizzaapi.pizza.model;
 
 import com.nikgri.demospringpizzaapi.topping.model.ToppingDto;
 
-
 import java.util.List;
-import java.util.Set;
 
 public class PizzaDto {
     private int id;

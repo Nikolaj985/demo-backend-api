@@ -15,7 +15,7 @@ public class Topping {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
     @ManyToMany(mappedBy = "toppings")

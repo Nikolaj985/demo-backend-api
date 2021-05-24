@@ -19,12 +19,12 @@ public class ToppingController {
     }
 
     @GetMapping
-    public List<Topping> getAllToppings(){
+    public List<Topping> getAllToppings() {
         return this.toppingService.getAlLToppings();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable int id){
+    public ResponseEntity<Object> delete(@PathVariable int id) {
         return this.toppingService.deleteToppingById(id);
     }
 

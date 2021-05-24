@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class PizzaService {
@@ -33,82 +32,80 @@ public class PizzaService {
     }
 
 
-
-    public List<PizzaDto> getAllPizzas(){
+    public List<PizzaDto> getAllPizzas() {
         List<Pizza> pizzas = this.pizzaRepository.findAll();
         List<Topping> toppings = this.toppingRepository.findAll();
 
         List<PizzaDto> pizzaDto = new ArrayList<>();
-        for(Pizza pizza : pizzas){
+        for (Pizza pizza : pizzas) {
             List<ToppingDto> toppingDto = new ArrayList<>();
-            for (Topping topping: toppings){
+            for (Topping topping : toppings) {
                 boolean contains = false;
-                for(Pizza pizza1: topping.getPizzas()){
-                    if(pizza1.getId().equals(pizza.getId())){
+                for (Pizza pizza1 : topping.getPizzas()) {
+                    if (pizza1.getId().equals(pizza.getId())) {
                         contains = true;
                     }
                 }
-                if(contains){
-                    toppingDto.add(new ToppingDto(topping.getId(),topping.getDescription()));
+                if (contains) {
+                    toppingDto.add(new ToppingDto(topping.getId(), topping.getDescription()));
                 }
             }
-            pizzaDto.add(new PizzaDto(pizza.getId(),pizza.getName(),pizza.getPrice(),pizza.getImage(),pizza.getSalePrice(), pizza.isActive(),toppingDto));
+            pizzaDto.add(new PizzaDto(pizza.getId(), pizza.getName(), pizza.getPrice(), pizza.getImage(), pizza.getSalePrice(), pizza.isActive(), toppingDto));
         }
 
         return pizzaDto;
     }
 
-    public PizzaDto findByName(String name){
-        try{
-            Pizza pizza =  this.pizzaRepository.findByName(name);
+    public PizzaDto findByName(String name) {
+        try {
+            Pizza pizza = this.pizzaRepository.findByName(name);
             List<Topping> toppings = this.toppingRepository.findAll();
             List<ToppingDto> toppingDto = new ArrayList<>();
-            for (Topping topping: toppings){
+            for (Topping topping : toppings) {
                 boolean contains = false;
-                for(Pizza pizza1: topping.getPizzas()){
-                    if(pizza1.getId().equals(pizza.getId())){
+                for (Pizza pizza1 : topping.getPizzas()) {
+                    if (pizza1.getId().equals(pizza.getId())) {
                         contains = true;
                     }
                 }
-                if(contains){
-                    toppingDto.add(new ToppingDto(topping.getId(),topping.getDescription()));
+                if (contains) {
+                    toppingDto.add(new ToppingDto(topping.getId(), topping.getDescription()));
                 }
             }
-            return  new PizzaDto(pizza.getId(),pizza.getName(),pizza.getPrice(),pizza.getImage(),pizza.getSalePrice(),pizza.isActive(),toppingDto);
-        }
-        catch (NullPointerException e){
+            return new PizzaDto(pizza.getId(), pizza.getName(), pizza.getPrice(), pizza.getImage(), pizza.getSalePrice(), pizza.isActive(), toppingDto);
+        } catch (NullPointerException e) {
 
-         throw new InvalidPizzaNameException("No pizza with such name found!");
+            throw new InvalidPizzaNameException("No pizza with such name found!");
 
         }
     }
 
-    public ResponseEntity<Object> addNewPizza(PizzaDto pizza){
-        if (!this.pizzaRepository.existsByName(pizza.getName())){
+    public ResponseEntity<Object> addNewPizza(PizzaDto pizza) {
+        if (!this.pizzaRepository.existsByName(pizza.getName())) {
             System.out.println(pizza.getToppings().stream().findFirst().get().getDescription());
             Set<Topping> toppings = new HashSet<>();
 
-            for(ToppingDto toppingDto : pizza.getToppings()){
-                if(this.toppingRepository.existsByDescription(toppingDto.getDescription())){
+            for (ToppingDto toppingDto : pizza.getToppings()) {
+                if (this.toppingRepository.existsByDescription(toppingDto.getDescription())) {
                     toppings.add(this.toppingRepository.findByDescription(toppingDto.getDescription()));
-                }else{
+                } else {
                     toppings.add(new Topping(toppingDto.getId(), toppingDto.getDescription()));
                 }
                 this.toppingRepository.saveAll(toppings);
             }
 
-            Pizza pizzaToSave= new Pizza(pizza.getId(),pizza.getName(),pizza.getPrice(),pizza.getImage(),pizza.getSalePrice(),pizza.isActive(),toppings);
+            Pizza pizzaToSave = new Pizza(pizza.getId(), pizza.getName(), pizza.getPrice(), pizza.getImage(), pizza.getSalePrice(), pizza.isActive(), toppings);
             this.pizzaRepository.save(pizzaToSave);
             return new ResponseEntity<>("Added", HttpStatus.OK);
-        }else{
+        } else {
             throw new PizzaAlreadyExistException();
         }
     }
 
-    public void deletePizza(int id){
-        if(this.pizzaRepository.existsById(id)){
+    public void deletePizza(int id) {
+        if (this.pizzaRepository.existsById(id)) {
             this.pizzaRepository.deleteById(id);
-        }else{
+        } else {
             throw new InvalidPizzaIdException("No pizza with that Id found!");
         }
 

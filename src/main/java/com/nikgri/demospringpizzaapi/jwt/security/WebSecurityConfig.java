@@ -1,5 +1,8 @@
 package com.nikgri.demospringpizzaapi.jwt.security;
 
+import com.nikgri.demospringpizzaapi.jwt.security.jwt.AuthEntryPointJwt;
+import com.nikgri.demospringpizzaapi.jwt.security.jwt.AuthTokenFilter;
+import com.nikgri.demospringpizzaapi.jwt.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,10 +16,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import com.nikgri.demospringpizzaapi.jwt.security.jwt.AuthEntryPointJwt;
-import com.nikgri.demospringpizzaapi.jwt.security.jwt.AuthTokenFilter;
-import com.nikgri.demospringpizzaapi.jwt.security.services.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -60,7 +59,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/auth/**").permitAll()
                 .antMatchers("/test/**").permitAll()
                 .antMatchers("/pizza").permitAll()
-                .antMatchers("/topping").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

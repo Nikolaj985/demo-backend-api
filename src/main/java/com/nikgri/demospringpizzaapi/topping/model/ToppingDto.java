@@ -1,9 +1,5 @@
 package com.nikgri.demospringpizzaapi.topping.model;
 
-import com.nikgri.demospringpizzaapi.pizza.model.PizzaDto;
-
-import java.util.Set;
-
 public class ToppingDto {
 
     private int id;

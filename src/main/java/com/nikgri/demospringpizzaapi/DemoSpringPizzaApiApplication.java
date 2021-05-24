@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoSpringPizzaApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoSpringPizzaApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoSpringPizzaApiApplication.class, args);
+    }
 
-	@GetMapping("/")
-	public String hello(){
-		return "Hello world!";
-	}
+    @GetMapping("/")
+    public String hello() {
+        return "Hello world!";
+    }
 
 }
