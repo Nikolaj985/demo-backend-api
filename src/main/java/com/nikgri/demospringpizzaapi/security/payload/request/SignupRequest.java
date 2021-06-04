@@ -1,4 +1,4 @@
-package com.nikgri.demospringpizzaapi.jwt.payload.request;
+package com.nikgri.demospringpizzaapi.security.payload.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

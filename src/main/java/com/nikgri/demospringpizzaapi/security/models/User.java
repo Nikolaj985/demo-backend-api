@@ -1,4 +1,4 @@
-package com.nikgri.demospringpizzaapi.jwt.models;
+package com.nikgri.demospringpizzaapi.security.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -31,6 +31,9 @@ public class User {
     @Size(max = 120)
     private String password;
 
+    @Column(name = "is_active")
+    private boolean isActive;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -44,6 +47,13 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String username, String email, String password, boolean isActive) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.isActive = isActive;
     }
 
     public Long getId() {
@@ -76,6 +86,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public Set<Role> getRoles() {

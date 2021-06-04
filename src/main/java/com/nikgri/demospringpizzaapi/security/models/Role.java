@@ -1,4 +1,4 @@
-package com.nikgri.demospringpizzaapi.jwt.models;
+package com.nikgri.demospringpizzaapi.security.models;
 
 import javax.persistence.*;
 

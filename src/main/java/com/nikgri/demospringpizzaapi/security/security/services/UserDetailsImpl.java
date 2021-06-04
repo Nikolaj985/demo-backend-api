@@ -1,7 +1,7 @@
-package com.nikgri.demospringpizzaapi.jwt.security.services;
+package com.nikgri.demospringpizzaapi.security.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nikgri.demospringpizzaapi.jwt.models.User;
+import com.nikgri.demospringpizzaapi.security.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

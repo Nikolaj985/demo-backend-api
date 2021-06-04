@@ -1,6 +1,6 @@
-package com.nikgri.demospringpizzaapi.jwt.security.jwt;
+package com.nikgri.demospringpizzaapi.security.security.jwt;
 
-import com.nikgri.demospringpizzaapi.jwt.security.services.UserDetailsServiceImpl;
+import com.nikgri.demospringpizzaapi.security.security.services.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

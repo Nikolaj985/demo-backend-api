@@ -10,6 +10,9 @@ public class ToppingDto {
         this.description = description;
     }
 
+    public ToppingDto(String description) {
+        this.description = description;
+    }
 
     public int getId() {
         return id;

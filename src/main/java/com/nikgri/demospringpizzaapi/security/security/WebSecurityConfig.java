@@ -1,8 +1,8 @@
-package com.nikgri.demospringpizzaapi.jwt.security;
+package com.nikgri.demospringpizzaapi.security.security;
 
-import com.nikgri.demospringpizzaapi.jwt.security.jwt.AuthEntryPointJwt;
-import com.nikgri.demospringpizzaapi.jwt.security.jwt.AuthTokenFilter;
-import com.nikgri.demospringpizzaapi.jwt.security.services.UserDetailsServiceImpl;
+import com.nikgri.demospringpizzaapi.security.security.jwt.AuthEntryPointJwt;
+import com.nikgri.demospringpizzaapi.security.security.jwt.AuthTokenFilter;
+import com.nikgri.demospringpizzaapi.security.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,9 +56,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//                .authorizeRequests().antMatchers(HttpMethod.POST, "/pizza/new").permitAll().and()
+//                .authorizeRequests().antMatchers(HttpMethod.DELETE, "/pizza/**").permitAll().and()
+//                .authorizeRequests().antMatchers(HttpMethod.DELETE, "/topping/name/**").permitAll().and()
+//                .authorizeRequests().antMatchers(HttpMethod.POST, "/topping/new").permitAll().and()
                 .authorizeRequests().antMatchers("/auth/**").permitAll()
+//                .antMatchers("/auth/**").permitAll()
                 .antMatchers("/test/**").permitAll()
-                .antMatchers("/pizza").permitAll()
+                .antMatchers("/pizza/**").permitAll()
+                .antMatchers("/topping/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

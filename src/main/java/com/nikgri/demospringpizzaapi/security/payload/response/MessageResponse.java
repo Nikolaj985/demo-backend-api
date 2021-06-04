@@ -1,4 +1,4 @@
-package com.nikgri.demospringpizzaapi.jwt.payload.response;
+package com.nikgri.demospringpizzaapi.security.payload.response;
 
 public class MessageResponse {
     private String message;

@@ -1,4 +1,4 @@
-package com.nikgri.demospringpizzaapi.jwt.payload.response;
+package com.nikgri.demospringpizzaapi.security.payload.response;
 
 import java.util.List;
 

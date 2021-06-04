@@ -1,6 +1,6 @@
-package com.nikgri.demospringpizzaapi.jwt.repository;
+package com.nikgri.demospringpizzaapi.security.repository;
 
-import com.nikgri.demospringpizzaapi.jwt.models.User;
+import com.nikgri.demospringpizzaapi.security.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

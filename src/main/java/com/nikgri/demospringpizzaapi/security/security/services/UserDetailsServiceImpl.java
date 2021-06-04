@@ -1,7 +1,7 @@
-package com.nikgri.demospringpizzaapi.jwt.security.services;
+package com.nikgri.demospringpizzaapi.security.security.services;
 
-import com.nikgri.demospringpizzaapi.jwt.models.User;
-import com.nikgri.demospringpizzaapi.jwt.repository.UserRepository;
+import com.nikgri.demospringpizzaapi.security.models.User;
+import com.nikgri.demospringpizzaapi.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

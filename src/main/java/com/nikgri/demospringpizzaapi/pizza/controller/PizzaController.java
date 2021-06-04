@@ -4,6 +4,7 @@ import com.nikgri.demospringpizzaapi.pizza.model.PizzaDto;
 import com.nikgri.demospringpizzaapi.pizza.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,13 +32,26 @@ public class PizzaController {
     }
 
     @PostMapping("/new")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Object> newPizza(@RequestBody PizzaDto pizza) {
+        System.out.println(pizza);
         return this.pizzaService.addNewPizza(pizza);
     }
 
-    @DeleteMapping("/{id}")
-    public void deletePizza(@PathVariable int id) {
-        this.pizzaService.deletePizza(id);
+
+    @PutMapping()
+    public ResponseEntity activatePizza(@RequestBody String name) {
+        return this.pizzaService.activatePizza(name);
+    }
+
+    @PutMapping("/edit")
+    public ResponseEntity activatePizza(@RequestBody PizzaDto pizzaDto) {
+        return this.pizzaService.editPizza(pizzaDto);
+    }
+
+    @DeleteMapping("/{name}")
+    public ResponseEntity deletePizza(@PathVariable String name) {
+        return this.pizzaService.deletePizza(name);
     }
 
 }

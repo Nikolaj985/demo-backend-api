@@ -2,6 +2,7 @@ package com.nikgri.demospringpizzaapi.pizza.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nikgri.demospringpizzaapi.pizza.model.EHeat;
 import com.nikgri.demospringpizzaapi.topping.entity.Topping;
 
 import javax.persistence.*;
@@ -21,13 +22,16 @@ public class Pizza {
 
 
     @Column(name = "price")
-    private int price;
+    private double price;
 
     @Column(name = "image")
     private String image;
 
+    @Column(name = "heat")
+    private EHeat heat;
+
     @Column(name = "sale_price")
-    private int salePrice;
+    private double salePrice;
 
     @Column(name = "is_active")
     private boolean isActive;
@@ -42,20 +46,22 @@ public class Pizza {
     public Pizza() {
     }
 
-    public Pizza(String name, int price, String image, int salePrice, boolean isActive, Set<Topping> toppings) {
+    public Pizza(String name, double price, String image, EHeat heat, double salePrice, boolean isActive, Set<Topping> toppings) {
         this.name = name;
         this.price = price;
         this.image = image;
+        this.heat = heat;
         this.salePrice = salePrice;
         this.isActive = isActive;
         this.toppings = toppings;
     }
 
-    public Pizza(Integer id, String name, int price, String image, int salePrice, boolean isActive, Set<Topping> toppings) {
+    public Pizza(Integer id, String name, double price, String image, EHeat heat, double salePrice, boolean isActive, Set<Topping> toppings) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.image = image;
+        this.heat = heat;
         this.salePrice = salePrice;
         this.isActive = isActive;
         this.toppings = toppings;
@@ -69,6 +75,10 @@ public class Pizza {
         this.id = id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -77,11 +87,11 @@ public class Pizza {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -93,11 +103,11 @@ public class Pizza {
         this.image = image;
     }
 
-    public int getSalePrice() {
+    public double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(int salePrice) {
+    public void setSalePrice(double salePrice) {
         this.salePrice = salePrice;
     }
 
@@ -107,6 +117,14 @@ public class Pizza {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public EHeat getHeat() {
+        return heat;
+    }
+
+    public void setHeat(EHeat heat) {
+        this.heat = heat;
     }
 
     public Set<Topping> getToppings() {
