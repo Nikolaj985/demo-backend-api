@@ -32,23 +32,25 @@ public class PizzaController {
     }
 
     @PostMapping("/new")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Object> newPizza(@RequestBody PizzaDto pizza) {
         System.out.println(pizza);
         return this.pizzaService.addNewPizza(pizza);
     }
 
-
+    @PreAuthorize("hasRole('USER')")
     @PutMapping()
     public ResponseEntity activatePizza(@RequestBody String name) {
         return this.pizzaService.activatePizza(name);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/edit")
     public ResponseEntity activatePizza(@RequestBody PizzaDto pizzaDto) {
         return this.pizzaService.editPizza(pizzaDto);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/{name}")
     public ResponseEntity deletePizza(@PathVariable String name) {
         return this.pizzaService.deletePizza(name);
