@@ -27,9 +27,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
-@CrossOrigin(origins = {"https://mydemo-frontend-pizza.herokuapp.com", "http://localhost:4200"})
+
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = {"https://mydemo-frontend-pizza.herokuapp.com", "http://localhost:4200"})
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
