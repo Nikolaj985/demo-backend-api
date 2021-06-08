@@ -27,6 +27,7 @@ public class PizzaController {
     }
 
     @GetMapping("/{name}")
+
     public PizzaDto getPizzaByName(@PathVariable String name) {
         return this.pizzaService.findByName(name);
     }

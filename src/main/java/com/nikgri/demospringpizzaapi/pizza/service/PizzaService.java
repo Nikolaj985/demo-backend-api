@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -40,9 +39,10 @@ public class PizzaService {
         } else {
             pizzas = this.pizzaRepository.findAll();
         }
-        List<Topping> toppings = this.toppingRepository.findAll();
 
+        List<Topping> toppings = this.toppingRepository.findAll();
         List<PizzaDto> pizzaDto = new ArrayList<>();
+
         for (Pizza pizza : pizzas) {
             List<ToppingDto> toppingDto = new ArrayList<>();
             for (Topping topping : toppings) {
@@ -56,7 +56,8 @@ public class PizzaService {
                     toppingDto.add(new ToppingDto(topping.getId(), topping.getDescription()));
                 }
             }
-            pizzaDto.add(new PizzaDto(pizza.getId(), pizza.getName(), pizza.getPrice(), pizza.getImage(), pizza.getHeat(), pizza.getSalePrice(), pizza.isActive(), toppingDto));
+            pizzaDto.add(new PizzaDto(pizza.getId(), pizza.getName(), pizza.getPrice(),
+                    pizza.getImage(), pizza.getHeat(), pizza.getSalePrice(), pizza.isActive(), toppingDto));
         }
         return pizzaDto;
     }
@@ -77,7 +78,8 @@ public class PizzaService {
                     toppingDto.add(new ToppingDto(topping.getId(), topping.getDescription()));
                 }
             }
-            return new PizzaDto(pizza.getId(), pizza.getName(), pizza.getPrice(), pizza.getImage(), pizza.getHeat(), pizza.getSalePrice(), pizza.isActive(), toppingDto);
+            return new PizzaDto(pizza.getId(), pizza.getName(), pizza.getPrice(), pizza.getImage(),
+                    pizza.getHeat(), pizza.getSalePrice(), pizza.isActive(), toppingDto);
         } catch (NullPointerException e) {
 
             throw new InvalidPizzaNameException("No pizza with such name found!");
@@ -98,7 +100,8 @@ public class PizzaService {
                 }
             }
 
-            Pizza pizzaToSave = new Pizza(pizza.getId(), pizza.getName(), pizza.getPrice(), pizza.getImage(), pizza.getHeat(), pizza.getSalePrice(), true, toppings);
+            Pizza pizzaToSave = new Pizza(pizza.getId(), pizza.getName(), pizza.getPrice(), pizza.getImage(),
+                    pizza.getHeat(), pizza.getSalePrice(), true, toppings);
             this.pizzaRepository.save(pizzaToSave);
             return ResponseEntity.ok(new MessageResponse("Pizza added!"));
         } else {
